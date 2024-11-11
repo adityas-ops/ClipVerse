@@ -52,8 +52,6 @@ const Home = () => {
               </View>
             </View>
             <SearchInput
-              value=""
-              handleChangeText={(e) => console.log(e)}
               placeholder="Search for anything"
             />
             <View className="w-full flex-1 items-center   pt-5 pb-8">
