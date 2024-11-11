@@ -4,14 +4,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import {images} from "../../constants"
 import SearchInput from "@/components/SearchInput";
 import Trending from "@/components/Trending";
-import { getAllPost } from "@/lib/appwrite";
+import { getAllPost, getLatestPost } from "@/lib/appwrite";
 import useAppwrite from "@/lib/useAppwrite";
 import EmptyState from "@/components/EmptyState";
+import VideoCard from "@/components/VideoCard";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
 
   const {data:posts,loading,refetch} = useAppwrite(getAllPost);
+  const {data:Latestposts} = useAppwrite(getLatestPost);
   
  
   const onRefresh = async() => {
@@ -28,7 +30,10 @@ const Home = () => {
         keyExtractor={(item:any) => item.$id}
         renderItem={({ item }) => (
           <View>
-            <Text className=" text-3xl text-white font-bold ">{` ${item.title}`}</Text>
+            {
+              item && <VideoCard video={item} />
+            }
+           
           </View>
         )}
         ListHeaderComponent={() => (
@@ -56,17 +61,8 @@ const Home = () => {
                 Latest Video
               </Text>
             <Trending
-            posts={[
-               {
-                id:1
-              },
-              {
-                 id:2
-               },
-               {
-                 id:3
-               }
-            ]}
+            
+            posts={Latestposts}
             />
             </View>
           </View>
