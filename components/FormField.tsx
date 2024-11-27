@@ -22,7 +22,7 @@ const FormField : React.FC<FormFieldProps> = ({
   return (
     <View className={` ${otherStyles} space-y-2`}>
       <Text className=' text-base text-gray-200'>{title}</Text>
-      <View className=' border-2 border-pink-800 flex-row items-center bg-black-100 w-full h-16 px-4 focus:border-secondary rounded-2xl'>
+      <View className=' shadow-sm shadow-slate-100   flex-row items-center bg-black-100 w-full h-16 px-4 focus:border-secondary rounded-2xl'>
         <TextInput
             value={value}
             onChangeText={handleChangeText}

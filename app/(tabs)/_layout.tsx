@@ -1,8 +1,9 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image,Platform } from "react-native";
 import React from "react";
 import { Tabs, Redirect } from "expo-router";
 import { icons } from "../../constants";
 import { StatusBar } from "expo-status-bar";
+
 
 interface TabIconProps {
   icon: any;
@@ -13,7 +14,7 @@ interface TabIconProps {
 
 const TabIcon: React.FC<TabIconProps> = ({ icon, name, color, focused }) => {
   return (
-    <View className="items-center justify-center gap-2">
+    <View className="items-center  h-full   justify-center gap-2">
       <Image
         source={icon}
         resizeMode="contain"
@@ -22,7 +23,7 @@ const TabIcon: React.FC<TabIconProps> = ({ icon, name, color, focused }) => {
       />
       <Text
       style={{color:color}}
-        className={`${focused ? " font-psemibold" : " font-pregular"} t text-xs`}
+        className={`${focused ? " font-psemibold" : " font-pregular"} w-full text-xs`}
       >
         {name}
       </Text>
@@ -42,7 +43,8 @@ const Layout = () => {
           // borderTopColor:"#161622",
           borderTopWidth:1,
           borderTopColor:"#232533",
-          height:84
+          height:80,
+          paddingTop:Platform.OS === "ios" ? 16 : 26
         }
       }}
     >

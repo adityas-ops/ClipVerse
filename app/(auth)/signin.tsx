@@ -5,7 +5,9 @@ import {images} from "../../constants"
 import FormField from '@/components/FormField'
 import CustomButton from '@/components/CustomButton'
 import { Link, router } from 'expo-router'
-import { signIn,signOut } from '@/lib/appwrite'
+import { getCurrentUser, signIn,signOut,deleteSessions} from '@/lib/appwrite'
+import { checkActiveSession } from "@/lib/appwrite";
+import { useGlobalContext } from '@/context/GlobalProvider'
 
 
 interface LoginFormState {
@@ -14,7 +16,7 @@ interface LoginFormState {
 }
 
 const SignIn = () => {
-
+  const {  setUser,setIsLogged } = useGlobalContext();
   const [form,setForm] = useState<LoginFormState>({
     email:'',
     password:''
@@ -27,9 +29,21 @@ const SignIn = () => {
     }
     setIsSubmitting(true);
     try {
-        const result  = await signIn(form.email, form.password,)
+      const activeSession = await checkActiveSession();
 
-        router.replace("/home")
+      if (activeSession) {
+        // Delete the active sessions if one exists
+        await deleteSessions();
+      }
+         await signIn(form.email, form.password,)
+        // const result =  await signIn(form.email, form.password,)
+        const result = await getCurrentUser()
+        console.log("result------------------",result)
+        if(result){
+          setUser(result)
+          setIsLogged(true)
+          router.replace("/home")
+        }
     } catch (error: any) {
       Alert.alert("Error", error.message)
     }
