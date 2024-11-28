@@ -14,14 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.adityaops",
-      "package": "com.adityaops"
+      "bundleIdentifier": "com.adityaops"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.adityaops.com"
     },
     "web": {
       "bundler": "metro",
@@ -34,6 +34,17 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8295d22e-8020-4848-a2d0-48cd7d983801"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8295d22e-8020-4848-a2d0-48cd7d983801"
     }
   }
 }
